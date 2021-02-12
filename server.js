@@ -15,14 +15,17 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
+// connection for budget database on mongoDB
+// see models directory for database model
 mongoose.connect("mongodb://localhost/budget", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 
-// routes
+// routes for api calls used by Express module
 app.use(require("./routes/api.js"));
 
+// setup server on local port
 app.listen(PORT, () => {
   console.log(`App running on port ${PORT}!`);
 });

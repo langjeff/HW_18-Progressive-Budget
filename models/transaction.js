@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-
+// transaction collection model from budget database used in routes directory & server.js.
+// name - stores name of transaction
+// value - stores amount fo transaction
+// date - autopopulated date of transaction
 const transactionSchema = new Schema(
   {
     name: {

@@ -1,6 +1,7 @@
 let transactions = [];
 let myChart;
 
+//*  fetch for api/transaction route
 fetch("/api/transaction")
   .then(response => {
     return response.json();
@@ -8,7 +9,7 @@ fetch("/api/transaction")
   .then(data => {
     // save db data on global variable
     transactions = data;
-
+    // calls populate functions below
     populateTotal();
     populateTable();
     populateChart();
@@ -79,6 +80,7 @@ function populateChart() {
 }
 
 function sendTransaction(isAdding) {
+  // form control functions for adding transaction
   let nameEl = document.querySelector("#t-name");
   let amountEl = document.querySelector("#t-amount");
   let errorEl = document.querySelector(".form .error");
@@ -104,6 +106,7 @@ function sendTransaction(isAdding) {
     transaction.value *= -1;
   }
 
+  //! this is neccessary for service worker to be able to store cached entries when offline.
   // add to beginning of current array of data
   transactions.unshift(transaction);
 
@@ -136,6 +139,7 @@ function sendTransaction(isAdding) {
   })
   .catch(err => {
     // fetch failed, so save in indexed db
+    //! this saves the transaction if the fetch above fails into cache
     saveRecord(transaction);
 
     // clear form
