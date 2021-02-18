@@ -13,7 +13,8 @@ app.use(compression());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static("./public"));
+app.use(express.static(__dirname + "/public"));
+// app.use(express.static("./public"));
 
 // connection for budget database on mongoDB
 // see models directory for database model
@@ -23,7 +24,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
   useCreateIndex: true,
   useFindAndModify: false,
 });
-
+// code to just connect local
 // mongoose.connect("mongodb://localhost/budget", {
 //   useNewUrlParser: true,
 //   useFindAndModify: false,
